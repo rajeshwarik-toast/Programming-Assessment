@@ -67,7 +67,7 @@ public class Employee {
         }
         public String ToString() {
             return "EMPLOYEE DETAILS \n ID = " + empID + ", Name = " +
-                    Name.substring(0).toUpperCase()+Name.substring(1) + ", Designation = "
+                    Name.substring(0,1).toUpperCase()+Name.substring(1) + ", Designation = "
                     + Designation + ", Department = " + Department + "," ;
         }
 }
