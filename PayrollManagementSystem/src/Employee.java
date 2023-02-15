@@ -5,13 +5,13 @@ public class Employee {
         private String Department;
         private String Designation;
         private Double Salary;
-        public Employee() {}
-        public static int getCounter(){
-            return TestEmployee.counter;
+        private static int counter = 1000;
+        public Employee() {
+            empID=++counter;
         }
         Scanner sc=new Scanner(System.in);
         public void setEmpID(int empID){
-            empID = ++TestEmployee.counter;
+            empID = ++counter;
             this.empID = empID;
         }
         public int getEmpId(){
@@ -52,7 +52,7 @@ public class Employee {
             return Designation;
         }
         public void setSal(String Salary){
-            while (!((Salary.matches("([0-9]*)\\.([0-9]*)")) )){
+            while (!((Salary.matches("([0-9]*)\\.([0-9]+)")) )){
                     System.out.println("Enter valid salary");
                     Salary = sc.nextLine();
             }
@@ -64,7 +64,7 @@ public class Employee {
         }
         public Double getSal(){ return Salary;}
         public Employee(String EmpName, String Dept, String  Desgn, Double Sal){
-            empID = ++TestEmployee.counter;
+            empID = ++counter;
             this.Name=EmpName;
             this.Department=Dept;
             this.Designation=Desgn;
