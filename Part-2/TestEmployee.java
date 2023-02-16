@@ -5,23 +5,22 @@ public class TestEmployee {
     static AttendanceMaster attendanceMaster = new AttendanceMaster();
     public static void main(String[] args) {
         Scanner sc= new Scanner(System.in);
-        int choiceCount=1;
+        String choiceCount="a";
         String Name,departmentOption, designationOption, Salary;
-
-        while(choiceCount==1){
-            System.out.println("ENTER EMPLOYEE DETAILS ");
+        while(choiceCount.matches("[a]")){
+            System.out.println(">>> ENTER EMPLOYEE DETAILS ");
             System.out.println("EMPLOYEE NAME :  ");
             Name = sc.nextLine();
             Employee employee1 = new Employee();
             employee1.setEmpName(Name);
 
             System.out.println("ENTER EMPLOYEE DEPARTMENT  ");
-            System.out.println("1. Customer Service \n 2. Marketing & Sales \n 3. Resource & Development \n 4. HR");
+            System.out.println(" 1. Customer Service \n 2. Marketing & Sales \n 3. Resource & Development \n 4. HR");
             departmentOption = sc.nextLine();
             employee1.setDept(departmentOption);
 
             System.out.println("ENTER EMPLOYEE DESIGNATION ");
-            System.out.println("1. Manager \n 2. Director \n 3. Software Developer \n 4. Quality Analyser");
+            System.out.println(" 1. Manager \n 2. Director \n 3. Software Developer \n 4. Quality Analyser");
             designationOption = sc.nextLine();
             employee1.setDesg(designationOption);
 
@@ -30,16 +29,27 @@ public class TestEmployee {
             employee1.setSal(Salary);
 
             employee.add(employee1);
-            System.out.println("Like to add employee details? If yes enter 1 else enter 0");
-            choiceCount=sc.nextInt();
+            System.out.println("Like to add employee details? If yes enter a else enter b");
+            choiceCount=sc.nextLine();
             sc.nextLine();
+
         }
         System.out.println();
-        for(int i=0; i<employee.size(); i++) {
-            System.out.print(employee.get(i).toString());
-            employee.get(i).setAllowance();
+        System.out.println("Like to add attendance ? if yes press 1 else press 0");
+        String option = sc.nextLine();
+        while(option.matches("[1]")) {
+            if (employee.size() <= 0) {
+                break;
+            }
+            else {
+                for (int i = 0; i < employee.size(); i++) {
+                    attendanceMaster.getAttendance();
+                    attendanceMaster.showEligibleList();
+                }
+            }
         }
-        attendanceMaster.getAttendance();
+        while(option.matches("[b]")){
+            break;
+        }
     }
 }
-
