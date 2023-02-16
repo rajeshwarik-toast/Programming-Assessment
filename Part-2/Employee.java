@@ -1,10 +1,10 @@
 import java.util.Scanner;
 public class Employee {
         private int empID;
-        private String Name;
-        private String Department;
-        private String Designation;
-        private Double Salary;
+        private String name;
+        private String department;
+        private String designation;
+        private Double salary;
         private static int counter = 1000;
         public Employee() {
             empID=++counter;
@@ -18,76 +18,92 @@ public class Employee {
         public int getEmpId(){
             return empID;
         }
-        public void setEmpName(String Name){
-            while(!(Name.matches("[A-Za-z ]{3,20}+") )){
+        public void setEmpName(String name){
+            while(!(name.matches("[A-Za-z ]{3,20}+") )){
                 System.out.println("Re-enter the employee name");
-                Name=sc.nextLine();
+                name=sc.nextLine();
             }
-            this.Name=Name.substring(0,1).toUpperCase()+Name.substring(1);
+            this.name=name.substring(0,1).toUpperCase()+name.substring(1);
         }
         public String getEmpName(){
-            return Name;
+            return name;
         }
         public void setDept(String departmentOption){
-            String Department[]={"Customer Service","Marketing & Sales","Resource & Development","HR"};
+            String department[]={"Customer Service","Marketing & Sales","Resource & Development","HR"};
             while(!(departmentOption.matches("[1-4]"))){
                 System.out.println("Enter valid option");
                 departmentOption = sc.nextLine();
             }
             int depNumber = Integer.parseInt(departmentOption);
-            this.Department=Department[depNumber-1];
+            this.department=department[depNumber-1];
         }
         public String getDept(){
-            return Department;
+            return department;
         }
         public void setDesg(String designationOption){
-            String Designation[] = {"Manager","Director", "Software Developer", "Quality Analyser"};
+            String designation[] = {"Manager","Director", "Software Developer", "Quality Analyser"};
             while(!(designationOption.matches("[1-4]"))){
                 System.out.println("Enter valid option ");
                 designationOption = sc.nextLine();
             }
             int desgNumber=Integer.parseInt(designationOption);
-            this.Designation=Designation[desgNumber-1];
+            this.designation=designation[desgNumber-1];
         }
         public String getDesg(){
-            return Designation;
+            return designation;
         }
-        public void setSal(String Salary){
-            while (!(Salary.matches("([0-9]*)\\.([0-9]+)|([0-9]+)"))){
+        public void setSal(String salary){
+//            while(true) {
+//                try {
+//                    double sal = Double.parseDouble(Salary);
+//                    if(sal>5000){
+//                        break;
+//                    }
+//                }
+//                catch (NumberFormatException e){
+//                    System.out.println(">>Enter a number");
+//                    System.out.println("Enter Salary");
+//                    Salary = sc.nextLine();
+//                    continue;
+//                }
+            double sal;
+            while(true){
+                if(salary.matches("([0-9]*)\\.([0-9]+)|([0-9]+)")){
+                    sal = Double.parseDouble(salary);
+                    if(sal >= 1000) {
+                        this.salary= sal;
+                        break;
+                    }
+                }
+                else{
                     System.out.println("Enter valid salary");
-                    Salary = sc.nextLine();
-            }
-            while (!(Salary.matches("([0-9]*)\\.([0-9]+)|([0-9]+)"))) {
-                while (Double.parseDouble(Salary) < 5000.0) {
-                    System.out.println("Enter salary above 50000.0 ");
-                    Salary = sc.nextLine();
+                    salary = sc.nextLine();
                 }
             }
-            this.Salary=Double.parseDouble(Salary);
         }
-        public Double getSal(){ return Salary;}
-        public Employee(String EmpName, String Dept, String  Desgn, Double Sal){
+        public Double getSal(){ return salary;}
+        public Employee(String empName, String dept, String  desgn, Double sal){
             empID = ++counter;
-            this.Name=EmpName;
-            this.Department=Dept;
-            this.Designation=Desgn;
-            this.Salary=Sal;
+            this.name=empName;
+            this.department=dept;
+            this.designation=desgn;
+            this.salary=sal;
         }
         public void setAllowance(){
-            System.out.println("  Salary is " +Salary);
-            double AllowanceSalary;
-            if(Designation.compareTo("Manager") == 0){
-                AllowanceSalary=this.Salary+((20.0/100.0)*this.Salary);
+            System.out.println("  Salary is " +salary);
+            double allowanceSalary;
+            if(designation.compareTo("Manager") == 0){
+                allowanceSalary=this.salary+((20.0/100.0)*this.salary);
             }
             else{
-                AllowanceSalary=this.Salary+((10.0/100.0)*this.Salary);
+                allowanceSalary=this.salary+((10.0/100.0)*this.salary);
             }
-            System.out.println("    Allowance Salary  " +String.format("%.2f", AllowanceSalary));
-            AllowanceSalary-=this.Salary;
-            System.out.println("    Allowance " + String.format("%.2f", AllowanceSalary));
+            System.out.println("    Allowance Salary  " +String.format("%.2f", allowanceSalary));
+            allowanceSalary-=this.salary;
+            System.out.println("    Allowance " + String.format("%.2f", allowanceSalary));
         }
         public String toString() {
             return ">> EMPLOYEE DETAILS \n ID = " + empID + ", Name = " +
-                    Name + ", Department = " + Department + ", Designation = " + Designation + "," ;
+                    name + ", Department = " + department + ", Designation = " + designation + "," ;
         }
 }
