@@ -53,13 +53,15 @@ public class Employee {
             return Designation;
         }
         public void setSal(String Salary){
-            while (!((Salary.matches("([0-9]*)\\.([0-9]+)")) )){
+            while (!(Salary.matches("([0-9]*)\\.([0-9]+)|([0-9]+)"))){
                     System.out.println("Enter valid salary");
                     Salary = sc.nextLine();
             }
-            if(Double.parseDouble(Salary)<5000.0){
-                System.out.println("Enter salary above 50000.0 ");
-                Salary = sc.nextLine();
+            while (!(Salary.matches("([0-9]*)\\.([0-9]+)|([0-9]+)"))) {
+                while (Double.parseDouble(Salary) < 5000.0) {
+                    System.out.println("Enter salary above 50000.0 ");
+                    Salary = sc.nextLine();
+                }
             }
             this.Salary=Double.parseDouble(Salary);
         }
@@ -80,12 +82,12 @@ public class Employee {
             else{
                 AllowanceSalary=this.Salary+((10.0/100.0)*this.Salary);
             }
-            System.out.println("The allowance of the employee is " +String.format("%.2f", AllowanceSalary));
+            System.out.println("    Allowance Salary  " +String.format("%.2f", AllowanceSalary));
             AllowanceSalary-=this.Salary;
-            System.out.println("The difference is " + String.format("%.2f", AllowanceSalary));
+            System.out.println("    Allowance " + String.format("%.2f", AllowanceSalary));
         }
         public String toString() {
-            return "EMPLOYEE DETAILS \n ID = " + empID + ", Name = " +
+            return ">> EMPLOYEE DETAILS \n ID = " + empID + ", Name = " +
                     Name + ", Department = " + Department + ", Designation = " + Designation + "," ;
         }
 }
