@@ -6,13 +6,13 @@ public class TestEmployee {
     public static void main(String[] args) {
         Scanner sc= new Scanner(System.in);
         String choiceCount="a";
-        String Name,departmentOption, designationOption, Salary;
+        String name,departmentOption, designationOption, salary;
         while(choiceCount.matches("[a]")){
             System.out.println(">>> ENTER EMPLOYEE DETAILS ");
             System.out.println("EMPLOYEE NAME :  ");
-            Name = sc.nextLine();
+            name = sc.nextLine();
             Employee employee1 = new Employee();
-            employee1.setEmpName(Name);
+            employee1.setEmpName(name);
 
             System.out.println("ENTER EMPLOYEE DEPARTMENT  ");
             System.out.println(" 1. Customer Service \n 2. Marketing & Sales \n 3. Resource & Development \n 4. HR");
@@ -25,31 +25,24 @@ public class TestEmployee {
             employee1.setDesg(designationOption);
 
             System.out.println("ENTER EMPLOYEE SALARY ");
-            Salary = sc.nextLine();
-            employee1.setSal(Salary);
+            salary = sc.nextLine();
+            employee1.setSal(salary);
 
             employee.add(employee1);
             System.out.println("Like to add employee details? If yes enter a else enter b");
             choiceCount=sc.nextLine();
-            sc.nextLine();
-
+//          sc.nextLine();
         }
         System.out.println();
         System.out.println("Like to add attendance ? if yes press 1 else press 0");
         String option = sc.nextLine();
-        while(option.matches("[1]")) {
-            if (employee.size() <= 0) {
-                break;
-            }
-            else {
-                for (int i = 0; i < employee.size(); i++) {
-                    attendanceMaster.getAttendance();
-                    attendanceMaster.showEligibleList();
-                }
-            }
+        while(!(option.matches("[0-1]"))) {
+            System.out.println("Enter valid option");
+            option = sc.nextLine();
         }
-        while(option.matches("[b]")){
-            break;
+        if(option.matches("[1]")){
+                attendanceMaster.getAttendance(employee);
+                attendanceMaster.showEligibleList();
         }
     }
 }
