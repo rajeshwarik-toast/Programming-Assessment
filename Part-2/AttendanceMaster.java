@@ -1,16 +1,32 @@
 import java.util.*;
-
 public class AttendanceMaster {
-    Dictionary<Employee, Integer> dictionary = new Hashtable();
+    Hashtable<Employee, Integer> dictionary = new Hashtable();
     public void getAttendance(){
-        System.out.println("Enter the no of days present");
+
         Scanner sc = new Scanner(System.in);
-        int noOfdays=0;
+        String noOfdays;
         for(Employee employee: TestEmployee.employee ){
-            noOfdays=sc.nextInt();
-            dictionary.put(employee,noOfdays);
+            System.out.println("ENTER THE NO OF DAYS ");
+            noOfdays=sc.nextLine();
+            while(!(noOfdays.matches("[1-9]+"))){
+                System.out.println("Enter valid number of days");
+                noOfdays = sc.nextLine();
+            }
+            int value = Integer.parseInt(noOfdays);
+            dictionary.put(employee, value);
         }
     }
-    public void showEligibleList(){
+    public void showEligibleList() {
+
+        Set<Map.Entry<Employee, Integer>> entrySet = dictionary.entrySet();
+        for (Map.Entry<Employee, Integer> entry1 : entrySet) {
+
+            if(entry1.getValue()>10){
+                System.out.println("###   ELIGIBLE LIST   ###");
+                System.out.print(entry1.getKey().toString());
+                entry1.getKey().setAllowance();
+                System.out.println("    Attendance = " +entry1.getValue());
+            }
+        }
     }
 }
