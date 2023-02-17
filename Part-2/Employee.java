@@ -9,7 +9,6 @@ public class Employee {
         public Employee() {
             empID=++counter;
         }
-
         Scanner sc=new Scanner(System.in);
         public void setEmpID(int empID){
             empID = ++counter;
@@ -20,7 +19,7 @@ public class Employee {
         }
         public void setEmpName(String name){
             while(!(name.matches("[A-Za-z ]{3,20}+") )){
-                System.out.println("Re-enter the employee name");
+                System.out.println(">>>  RE-ENTER THE EMPLOYEE NAME");
                 name=sc.nextLine();
             }
             this.name=name.substring(0,1).toUpperCase()+name.substring(1);
@@ -31,7 +30,7 @@ public class Employee {
         public void setDept(String departmentOption){
             String department[]={"Customer Service","Marketing & Sales","Resource & Development","HR"};
             while(!(departmentOption.matches("[1-4]"))){
-                System.out.println("Enter valid option");
+                System.out.println(">>>  ENTER THE VALID OPTION");
                 departmentOption = sc.nextLine();
             }
             int depNumber = Integer.parseInt(departmentOption);
@@ -43,7 +42,7 @@ public class Employee {
         public void setDesg(String designationOption){
             String designation[] = {"Manager","Director", "Software Developer", "Quality Analyser"};
             while(!(designationOption.matches("[1-4]"))){
-                System.out.println("Enter valid option ");
+                System.out.println(">>>  ENTER THE VALID OPTION");
                 designationOption = sc.nextLine();
             }
             int desgNumber=Integer.parseInt(designationOption);
@@ -53,19 +52,6 @@ public class Employee {
             return designation;
         }
         public void setSal(String salary){
-//            while(true) {
-//                try {
-//                    double sal = Double.parseDouble(Salary);
-//                    if(sal>5000){
-//                        break;
-//                    }
-//                }
-//                catch (NumberFormatException e){
-//                    System.out.println(">>Enter a number");
-//                    System.out.println("Enter Salary");
-//                    Salary = sc.nextLine();
-//                    continue;
-//                }
             double sal;
             while(true){
                 if(salary.matches("([0-9]*)\\.([0-9]+)|([0-9]+)")){
@@ -74,9 +60,13 @@ public class Employee {
                         this.salary= sal;
                         break;
                     }
+                    else{
+                        System.out.println(">>>  ENTER THE SALARY ABOVE 1000.0");
+                        salary = sc.nextLine();
+                    }
                 }
                 else{
-                    System.out.println("Enter valid salary");
+                    System.out.println(">>>  ENTER VALID SALARY");
                     salary = sc.nextLine();
                 }
             }
