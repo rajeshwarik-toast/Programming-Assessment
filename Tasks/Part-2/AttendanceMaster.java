@@ -1,8 +1,7 @@
 import java.util.*;
 public class AttendanceMaster {
-    Hashtable<Employee, Integer> dictionary = new Hashtable();
+    LinkedHashMap<Employee, Integer> dictionary = new LinkedHashMap<>();
     public void getAttendance(ArrayList<Employee> employees){
-
         Scanner sc = new Scanner(System.in);
         String noOfdays;
         for(Employee employee: employees ){
