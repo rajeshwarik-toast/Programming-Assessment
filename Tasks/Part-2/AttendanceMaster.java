@@ -1,8 +1,8 @@
 import java.util.*;
 public class AttendanceMaster {
     LinkedHashMap<Employee, Integer> dictionary = new LinkedHashMap<>();
+    Scanner sc = new Scanner(System.in);
     public void getAttendance(ArrayList<Employee> employees){
-        Scanner sc = new Scanner(System.in);
         String noOfdays;
         for(Employee employee: employees ){
             System.out.println(">>>  ENTER THE NO OF DAYS OF " + employee.getEmpId() );
@@ -12,7 +12,7 @@ public class AttendanceMaster {
                 noOfdays = sc.nextLine();
             }
             int value = Integer.parseInt(noOfdays);
-            dictionary.put(employee, value);
+            dictionary.put(employee,value);
         }
     }
     public void showEligibleList() {
@@ -25,6 +25,40 @@ public class AttendanceMaster {
                 System.out.println("    Attendance = " +entry1.getValue());
                 System.out.println("--------------------------------------------------");
             }
+        }
+    }
+    public void updateAttendance() {
+        String employee_id,attendance;
+        Employee employee = new Employee();
+        System.out.println(">>>  ENTER THE ID OF THE EMPLOYEE TO UPDATE ATTENDANCE\n");
+        employee_id=sc.nextLine();
+        ArrayList<Integer> availableIdList=new ArrayList<>();
+        for(Map.Entry entry:dictionary.entrySet())
+        {
+            Employee e=(Employee)entry.getKey();
+            availableIdList.add(e.getEmpId());
+        }
+        while(!((employee_id.matches("[0-9]+"))&&availableIdList.contains(Integer.parseInt(employee_id)))){
+            System.out.println(">>> EITHER ID IS NOT IN THE ATTENDANCE LIST OR NOT IN CORRECT FORMAT \n");
+            employee_id = sc.nextLine();
+        }
+        for(Employee employees : TestEmployee.employee ) {
+            if (employees.getEmpId() == Integer.valueOf(employee_id)) {
+                employee=employees;
+            }
+        }
+        System.out.println(">>>  ENTER THE ATTENDANCE TO BE UPDATED\n");
+        attendance=sc.nextLine();
+        while(!(attendance.matches("[0-9]+"))){
+            System.out.println(" ENTER VALID ATTENDANCE\n");
+            attendance=sc.nextLine();
+        }
+        int updateAttendance = Integer.parseInt(attendance);
+        dictionary.replace(employee,updateAttendance);
+        for(Map.Entry entry:dictionary.entrySet())
+        {
+            System.out.println(entry.getKey());
+            System.out.println("ATTENDANCE : " +entry.getValue());
         }
     }
 }
