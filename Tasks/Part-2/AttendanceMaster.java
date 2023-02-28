@@ -1,6 +1,6 @@
 import java.util.*;
 public class AttendanceMaster {
-    LinkedHashMap<Employee, Integer> dictionary = new LinkedHashMap<>();
+    LinkedHashMap<Employee, Integer> employeeMap = new LinkedHashMap<>();
     Scanner sc = new Scanner(System.in);
     public void getAttendance(ArrayList<Employee> employees){
         String noOfdays;
@@ -12,11 +12,11 @@ public class AttendanceMaster {
                 noOfdays = sc.nextLine();
             }
             int value = Integer.parseInt(noOfdays);
-            dictionary.put(employee,value);
+            employeeMap.put(employee,value);
         }
     }
     public void showEligibleList() {
-        Set<Map.Entry<Employee, Integer>> entrySet = dictionary.entrySet();
+        Set<Map.Entry<Employee, Integer>> entrySet = employeeMap.entrySet();
         for (Map.Entry<Employee, Integer> entry1 : entrySet) {
             if(entry1.getValue()>10){
                 System.out.println("###----------   ELIGIBLE LIST   ----------###");
@@ -33,7 +33,7 @@ public class AttendanceMaster {
         System.out.println(">>>  ENTER THE ID OF THE EMPLOYEE TO UPDATE ATTENDANCE\n");
         employee_id=sc.nextLine();
         ArrayList<Integer> availableIdList=new ArrayList<>();
-        for(Map.Entry entry:dictionary.entrySet())
+        for(Map.Entry entry:employeeMap.entrySet())
         {
             Employee e=(Employee)entry.getKey();
             availableIdList.add(e.getEmpId());
@@ -54,8 +54,8 @@ public class AttendanceMaster {
             attendance=sc.nextLine();
         }
         int updateAttendance = Integer.parseInt(attendance);
-        dictionary.replace(employee,updateAttendance);
-        for(Map.Entry entry:dictionary.entrySet())
+        employeeMap.replace(employee,updateAttendance);
+        for(Map.Entry entry:employeeMap.entrySet())
         {
             System.out.println(entry.getKey());
             System.out.println("ATTENDANCE : " +entry.getValue());
