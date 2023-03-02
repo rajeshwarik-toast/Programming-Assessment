@@ -12,15 +12,15 @@ public class AttendanceMaster {
                     System.out.println("*** ENTER THE VALID NO OF DAYS ***");
                     noOfdays = sc.nextLine();
                 }
-                int value = Integer.parseInt(noOfdays);
-                employeeMap.put(employee, value);
+                int attendance = Integer.parseInt(noOfdays);
+                employeeMap.put(employee, attendance);
             }
         }
     }
     public void showEligibleList() {
         Set<Map.Entry<Employee, Integer>> entrySet = employeeMap.entrySet();
         System.out.println("\n------------------------------------------>>> ELIGIBLE LIST <<<------------------------------------------");
-        System.out.printf("| %-10s | %-8s | %-30s | %-20s | %-10s | %-10s |%n", "ID", "NAME", "DEPARTMENT","DESIGNATION","SALARY","ATTENDANCE");
+        System.out.printf("| %-8s | %-15s | %-30s | %-20s | %-10s | %-10s |%n", "ID", "NAME", "DEPARTMENT","DESIGNATION","SALARY","ATTENDANCE");
         System.out.println("----------------------------------------------------------------------------------------------------------");
         for (Map.Entry<Employee, Integer> entry1 : entrySet) {
             if (entry1.getValue() > 10) {
@@ -57,8 +57,8 @@ public class AttendanceMaster {
         }
         int updateAttendance = Integer.parseInt(attendance);
         employeeMap.replace(employee, updateAttendance);
-        System.out.println("\n------------------------------------------>>> UPDATED LIST <<<------------------------------------------");
-        System.out.printf("| %-10s | %-8s | %-30s | %-20s | %-10s | %-10s |%n", "ID", "NAME", "DEPARTMENT","DESIGNATION","SALARY","ATTENDANCE");
+        System.out.println("\n-------------------------------------------->>> UPDATED LIST <<<------------------------------------------");
+        System.out.printf("| %-8s | %-15s | %-30s | %-20s | %-10s | %-10s |%n", "ID", "NAME", "DEPARTMENT","DESIGNATION","SALARY","ATTENDANCE");
         System.out.println("----------------------------------------------------------------------------------------------------------");
         for (Map.Entry entry : employeeMap.entrySet()) {
             System.out.print(entry.getKey());
@@ -67,21 +67,17 @@ public class AttendanceMaster {
         }
     }
     public void filterEmployeeList() {
-        ArrayList<Employee> employeeArrayList = new ArrayList<Employee>(employeeMap.keySet());
+        ArrayList<Employee> employeeArrayList = new ArrayList<>(employeeMap.keySet());
         for(Employee employee : employeeArrayList){
             if(this.employeeMap.get(employee)<10){
                 employeeMap.remove(employee);
             }
         }
-        System.out.println("\n EMPLOYEE LIST IS FILTERED !!! ");
-        System.out.println("--------------------------------------------------------->>> FILTERED LIST <<<---------------------------------------------------------");
-        System.out.printf("| %-10s | %-8s | %-30s | %-20s | %-10s | %-10s |%n", "ID", "NAME", "DEPARTMENT","DESIGNATION","SALARY","ATTENDANCE");
-        System.out.println("------------------------------------------------------------------------------------------------------------------------------");
-        for (Employee employee: employeeMap.keySet()) {
-            System.out.print(employee.toString());
-            System.out.printf(" %-10s |",employeeMap.get(employee));
-            System.out.println();
+        if(!(employeeMap.isEmpty())) {
+            showEligibleList();
         }
-        System.out.println("------------------------------------------------------------------------------------------------------------------------------");
+        else{
+            System.out.println("***  ELIGIBLE LIST IS EMPTY  ***");
+        }
     }
 }
