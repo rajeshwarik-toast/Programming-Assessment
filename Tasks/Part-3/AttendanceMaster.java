@@ -2,82 +2,85 @@ import java.util.*;
 public class AttendanceMaster {
     LinkedHashMap<Employee, Integer> employeeMap = new LinkedHashMap<>();
     Scanner sc = new Scanner(System.in);
-    public void getAttendance(ArrayList<Employee> employees){
+    public void getAttendance(ArrayList<Employee> employees) {
         String noOfdays;
-        for(Employee employee: employees ){
-            System.out.println(">>>  ENTER THE NO OF DAYS OF " + employee.getEmpId() );
-            noOfdays=sc.nextLine();
-            while(!(noOfdays.matches("[0-9]+"))){
-                System.out.println("Enter valid number of days");
+        for (Employee employee : employees) {
+            if(!(employeeMap.containsKey(employee))){
+                System.out.println(">>>  ENTER THE NO OF DAYS OF " + employee.getEmpId());
                 noOfdays = sc.nextLine();
+                while (!(noOfdays.matches("[0-9]+"))) {
+                    System.out.println("Enter valid number of days");
+                    noOfdays = sc.nextLine();
+                }
+                int value = Integer.parseInt(noOfdays);
+                employeeMap.put(employee, value);
             }
-            int value = Integer.parseInt(noOfdays);
-            employeeMap.put(employee,value);
         }
     }
     public void showEligibleList() {
         Set<Map.Entry<Employee, Integer>> entrySet = employeeMap.entrySet();
-        System.out.println("###----------   ELIGIBLE LIST   ----------###");
         for (Map.Entry<Employee, Integer> entry1 : entrySet) {
-            if(entry1.getValue()>10){
-                System.out.print(entry1.getKey().toString());
-                entry1.getKey().setAllowance();
-                System.out.println("    Attendance = " +entry1.getValue());
+            if (entry1.getValue() > 10) {
+                System.out.println("###                                    ELIGIBLE LIST                                    ###");
+                System.out.printf("| %-10s | %-8s | %-20s | %-20s | %-10s |%n", "ID", "NAME", "DEPARTMENT","DESIGNATION","SALARY");
+                System.out.println("------------------------------------------------------------------------------------------------------------------------------");
+                for(int i=0;i<employeeMap.size();i++) {
+                    System.out.print(entry1.getKey().toString());
+                    System.out.println();
+                }
+                //entry1.getKey().setAllowance();
+                System.out.println("    Attendance = " + entry1.getValue());
             }
         }
-        System.out.println("--------------------------------------------------");
     }
     public void updateAttendance() {
-        String employee_id,attendance;
+        String employee_id, attendance;
         Employee employee = new Employee();
         System.out.println(">>>  ENTER THE ID OF THE EMPLOYEE TO UPDATE ATTENDANCE\n");
-        employee_id=sc.nextLine();
-        ArrayList<Integer> availableIdList=new ArrayList<>();
-        for(Map.Entry entry:employeeMap.entrySet())
-        {
-            Employee e=(Employee)entry.getKey();
+        employee_id = sc.nextLine();
+        ArrayList<Integer> availableIdList = new ArrayList<>();
+        for (Map.Entry entry : employeeMap.entrySet()) {
+            Employee e = (Employee) entry.getKey();
             availableIdList.add(e.getEmpId());
         }
-        while(!((employee_id.matches("[0-9]+"))&&availableIdList.contains(Integer.parseInt(employee_id)))){
+        while (!((employee_id.matches("[0-9]+")) && availableIdList.contains(Integer.parseInt(employee_id)))) {
             System.out.println(">>> EITHER ID IS NOT IN THE ATTENDANCE LIST OR NOT IN CORRECT FORMAT \n");
             employee_id = sc.nextLine();
         }
-        for(Employee employees : TestEmployee.employee ) {
+        for (Employee employees : TestEmployee.employee) {
             if (employees.getEmpId() == Integer.valueOf(employee_id)) {
-                employee=employees;
+                employee = employees;
             }
         }
         System.out.println(">>>  ENTER THE ATTENDANCE TO BE UPDATED\n");
-        attendance=sc.nextLine();
-        while(!(attendance.matches("[0-9]+"))){
+        attendance = sc.nextLine();
+        while (!(attendance.matches("[0-9]+"))) {
             System.out.println(" ENTER VALID ATTENDANCE\n");
-            attendance=sc.nextLine();
+            attendance = sc.nextLine();
         }
         int updateAttendance = Integer.parseInt(attendance);
-        employeeMap.replace(employee,updateAttendance);
-        for(Map.Entry entry:employeeMap.entrySet())
-        {
+        employeeMap.replace(employee, updateAttendance);
+        for (Map.Entry entry : employeeMap.entrySet()) {
             System.out.println(entry.getKey());
-            System.out.println("ATTENDANCE : " +entry.getValue());
+            System.out.println("ATTENDANCE : " + entry.getValue());
         }
     }
-    public void filterEmployeeList(){
-        Set<Map.Entry<Employee, Integer>> entrySet = employeeMap.entrySet();
-        System.out.println("--------------------------------------------------");
-        for (Map.Entry<Employee, Integer> entry1 : entrySet) {
-            if(entry1.getValue()<10){
-                employeeMap.remove(entry1.getKey());
-//                System.out.print(entry1.getKey().toString());
-//                entry1.getKey().setAllowance();
-//                System.out.println("    Attendance = " +entry1.getValue());
+    public void filterEmployeeList() {
+        ArrayList<Employee> employeeArrayList = new ArrayList<Employee>(employeeMap.keySet());
+        for(Employee employee : employeeArrayList){
+            if(this.employeeMap.get(employee)<10){
+                employeeMap.remove(employee);
             }
         }
-        System.out.println("--------------------------------------------------");
-        System.out.println();
+        System.out.println("\n EMPLOYEE LIST IS SUCCESSFULLY REMOVED !!! ");
         System.out.println("---------------->>> FILTERED LIST <<<----------------");
         for (Employee employee: employeeMap.keySet()) {
-            System.out.println(employee.toString());
-            employee.setAllowance();
+            System.out.printf("| %-10s | %-8s | %-20s | %-20s | %-10s |%n", "ID", "NAME", "DEPARTMENT","DESIGNATION","SALARY");
+            System.out.println("------------------------------------------------------------------------------------------------------------------------------");
+            for(int i=0;i<employeeMap.size();i++) {
+                System.out.print(employee.toString());
+                System.out.println();
+            }
         }
         System.out.println("--------------------------------------------------");
     }
