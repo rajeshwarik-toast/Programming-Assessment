@@ -66,7 +66,7 @@ public class MasterData {
             }
         }
         System.out.println("------------------------------------------------------------------------------------------------------------------------------");
-        System.out.printf("| %-10s | %-15s | %-30s | %-20s | %-10s |%n", "ID", "NAME", "DEPARTMENT", "DESIGNATION", "SALARY");
+        System.out.printf("| %-8s | %-15s | %-30s | %-20s | %-10s |%n", "ID", "NAME", "DEPARTMENT", "DESIGNATION", "SALARY");
         System.out.println("------------------------------------------------------------------------------------------------------------------------------");
         for (Employee employee1 : masterData) {
             System.out.println(employee1.toString());
