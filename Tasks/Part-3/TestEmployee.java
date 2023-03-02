@@ -3,16 +3,15 @@ import java.util.Scanner;
 public class TestEmployee {
     static ArrayList<Employee> employee = new ArrayList<>();
     static AttendanceMaster attendanceMaster = new AttendanceMaster();
-    static SalCalculator salCalculator = new SalCalculator();
     public static void main(String[] args) {
         Scanner sc= new Scanner(System.in);
         boolean flag=true;
         boolean optionflag=false;
-        System.out.printf("----------------------------------------------------------------------------------------------------------%n");
-        System.out.printf("                                        PAYROLL MANAGEMENT                                                %n");
-        System.out.printf("----------------------------------------------------------------------------------------------------------");
+        System.out.printf("-----------------------------------------------------------------------------------------------------------%n");
+        System.out.printf("                                     PAYROLL MANAGEMENT SYSTEM                                             %n");
+        System.out.printf("-----------------------------------------------------------------------------------------------------------");
         while(flag) {
-            System.out.println("\n-> CHOOSE THE OPTION\n    >>> 1. ADD EMPLOYEE\n    >>> 2. ADD ATTENDANCE\n    >>> " +
+            System.out.println("\n-> CHOOSE AN OPTION\n    >>> 1. ADD EMPLOYEE\n    >>> 2. ADD ATTENDANCE\n    >>> " +
                     "3. UPDATE ATTENDANCE \n    >>> 4. SORT \n    >>> 5. FILTER EMPLOYEE LIST \n    >>> 6. CALCULATE SALARY \n    >>> 7. DISPLAY DETAILS \n    >>> 8. EXIT \n  ENTER THE OPTION  :");
             String choice = sc.nextLine();
             String name, departmentOption, designationOption, salary;
@@ -56,6 +55,7 @@ public class TestEmployee {
                     }
                 }
                 case "3": {
+                    AttendanceMaster attendanceMaster = new AttendanceMaster();
                     if(!(attendanceMaster.employeeMap.isEmpty())){
                         attendanceMaster.updateAttendance();
                         optionflag=false;
@@ -110,6 +110,7 @@ public class TestEmployee {
                     }
                 }
                 case "6":{
+                    SalCalculator salCalculator = new SalCalculator();
                     if(!(attendanceMaster.employeeMap.isEmpty())){
                         if(optionflag==true) {
                             salCalculator.calculateSalary(attendanceMaster.employeeMap);
@@ -125,7 +126,7 @@ public class TestEmployee {
                         break;
                     }
                     else if(attendanceMaster.employeeMap.isEmpty()){
-                        System.out.println("***  ATTENDANCE HAS NOT BEEN ADDED !!! KINDLY PRESS OPTION 2 TO ADD ATTENDANCE  ***");
+                        System.out.println("***  NO EMPLOYEE FOUND TO CALCULATE SALARY !!!  ***");
                         break;
                     }
                 }
