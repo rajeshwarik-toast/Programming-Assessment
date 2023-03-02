@@ -19,7 +19,7 @@ public class Employee {
     }
     public void setEmpName(String name){
         while(!(name.matches("[A-Za-z ]{3,20}+") )){
-            System.out.println(">>>  RE-ENTER THE EMPLOYEE NAME");
+            System.out.println("***  ENTER THE VALID EMPLOYEE NAME WITH MINIMUM OF 3 CHARACTERS AND MAXIMUM OF 20 CHARACTERS   ***");
             name=sc.nextLine();
         }
         this.name=name.substring(0,1).toUpperCase()+name.substring(1);
@@ -28,9 +28,9 @@ public class Employee {
         return name;
     }
     public void setDept(String departmentOption){
-        String department[]={"Customer Service","Marketing & Sales","Resource & Development","HR"};
+        String department[]={"Customer Service","Marketing & Sales","Resource & Development","IT"};
         while(!(departmentOption.matches("[1-4]"))){
-            System.out.println(">>>  ENTER THE VALID OPTION");
+            System.out.println("***  ENTER THE VALID OPTION !!! ***\n>>>  ENTER EMPLOYEE DESIGNATION\n   1. Customer Service \n    2. Marketing & Sales \n    3. Resource & Development \n    4. IT\nENTER THE OPTION");
             departmentOption = sc.nextLine();
         }
         int depNumber = Integer.parseInt(departmentOption);
@@ -40,9 +40,9 @@ public class Employee {
         return department;
     }
     public void setDesg(String designationOption){
-        String designation[] = {"Manager","Director", "Software Developer", "Quality Analyser"};
+        String designation[] = {"Manager","Director", "Software Developer", "Accountant"};
         while(!(designationOption.matches("[1-4]"))){
-            System.out.println(">>>  ENTER THE VALID OPTION");
+            System.out.println(">>>  ENTER THE VALID OPTION !!! \n>>>  ENTER EMPLOYEE DESIGNATION\n   1. Manager \n    2. Director \n    3. Software Developer \n    4. Accountant\nENTER THE OPTION");
             designationOption = sc.nextLine();
         }
         int desgNumber=Integer.parseInt(designationOption);
@@ -61,12 +61,12 @@ public class Employee {
                     break;
                 }
                 else{
-                    System.out.println(">>>  ENTER THE SALARY ABOVE 1000.0");
+                    System.out.println("***  ENTER THE SALARY ABOVE 1000.0   ***");
                     salary = sc.nextLine();
                 }
             }
             else{
-                System.out.println(">>>  ENTER VALID SALARY");
+                System.out.println("*** ENTER VALID SALARY ***");
                 salary = sc.nextLine();
             }
         }
@@ -80,16 +80,12 @@ public class Employee {
         this.salary=sal;
     }
     public void setAllowance(){
-        //System.out.println("  Salary is " +salary);
-        //double allowanceSalary;
         if(designation.compareTo("Manager") == 0){
             salary=this.salary+((20.0/100.0)*this.salary);
         }
         else{
             salary=this.salary+((10.0/100.0)*this.salary);
         }
-        //System.out.println("    Allowance Salary  " +String.format("%.2f", salary));
-        //salary-=this.salary;
     }
     public double initialSalary(){
         double originalsalary;
@@ -103,8 +99,7 @@ public class Employee {
     }
     public String toString() {
         String displaydetails;
-        System.out.println();
-        displaydetails = String.format("| %-10s | %-8s | %-30s | %-20s | %-10s |%n", empID, name, department,designation,salary);
+        displaydetails = String.format("| %-10s | %-8s | %-30s | %-20s | %-10s |", empID, name, department,designation,salary);
         return displaydetails;
     }
 }
