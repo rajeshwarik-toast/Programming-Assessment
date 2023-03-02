@@ -79,22 +79,32 @@ public class Employee {
         this.designation=desgn;
         this.salary=sal;
     }
-    public double setAllowance(){
-        System.out.println("  Salary is " +salary);
-        double allowanceSalary;
+    public void setAllowance(){
+        //System.out.println("  Salary is " +salary);
+        //double allowanceSalary;
         if(designation.compareTo("Manager") == 0){
-            allowanceSalary=this.salary+((20.0/100.0)*this.salary);
+            salary=this.salary+((20.0/100.0)*this.salary);
         }
         else{
-            allowanceSalary=this.salary+((10.0/100.0)*this.salary);
+            salary=this.salary+((10.0/100.0)*this.salary);
         }
-        System.out.println("    Allowance Salary  " +String.format("%.2f", allowanceSalary));
-        allowanceSalary-=this.salary;
-        return allowanceSalary;
-
+        //System.out.println("    Allowance Salary  " +String.format("%.2f", salary));
+        //salary-=this.salary;
+    }
+    public double initialSalary(){
+        double originalsalary;
+        if(designation.compareTo("Manager") == 0){
+            originalsalary=salary/1.2;
+        }
+        else{
+            originalsalary=salary/1.1;
+        }
+        return originalsalary;
     }
     public String toString() {
-        return ">> EMPLOYEE DETAILS \n ID = " + empID + ", Name = " +
-                name + ", Department = " + department + ", Designation = " + designation + "," ;
+        String displaydetails;
+        System.out.println();
+        displaydetails = String.format("| %-10s | %-8s | %-30s | %-20s | %-10s |%n", empID, name, department,designation,salary);
+        return displaydetails;
     }
 }
