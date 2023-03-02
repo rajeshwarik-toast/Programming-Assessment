@@ -4,7 +4,7 @@ public class SalCalculator {
     public void calculateSalary(LinkedHashMap<Employee,Integer> employeeHashMap){
         double pf,gross,net;
         Set<Employee> entrySet = employeeHashMap.keySet();
-        System.out.printf("| %-10s | %-8s | %-30s | %-20s | %-10s | %-10s | %-10s | %-10s | %-10s |%n", "ID", "NAME", "DEPARTMENT","DESIGNATION","SALARY","ALLOWANCE","GROSS","PF","NET");
+        System.out.printf("| %-8s | %-15s | %-30s | %-20s | %-10s | %-10s | %-10s | %-10s | %-10s |%n", "ID", "NAME", "DEPARTMENT","DESIGNATION","SALARY","ALLOWANCE","GROSS","PF","NET");
         System.out.println("--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
         for (Employee employee : entrySet) {
             pf = (10 * employee.getSal())/100;
