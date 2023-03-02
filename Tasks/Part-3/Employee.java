@@ -42,7 +42,7 @@ public class Employee {
     public void setDesg(String designationOption){
         String designation[] = {"Manager","Director", "Software Developer", "Accountant"};
         while(!(designationOption.matches("[1-4]"))){
-            System.out.println(">>>  ENTER THE VALID OPTION !!! \n>>>  ENTER EMPLOYEE DESIGNATION\n   1. Manager \n    2. Director \n    3. Software Developer \n    4. Accountant\nENTER THE OPTION");
+            System.out.println("***  ENTER THE VALID OPTION !!! ***\n>>>  ENTER EMPLOYEE DESIGNATION\n   1. Manager \n    2. Director \n    3. Software Developer \n    4. Accountant\nENTER THE OPTION");
             designationOption = sc.nextLine();
         }
         int desgNumber=Integer.parseInt(designationOption);
@@ -99,7 +99,7 @@ public class Employee {
     }
     public String toString() {
         String displaydetails;
-        displaydetails = String.format("| %-10s | %-8s | %-30s | %-20s | %-10s |", empID, name, department,designation,salary);
+        displaydetails = String.format("| %-8s | %-15s | %-30s | %-20s | %-10s |", empID, name, department,designation,salary);
         return displaydetails;
     }
 }
