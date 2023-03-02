@@ -4,62 +4,72 @@ public class MasterData {
     MasterData(ArrayList<Employee> employee){
         for(Employee employees : employee){
             masterData.add(employees);
+        }
+    }
+    public void displayDetails(){
+        System.out.println("------------------------------------------------------------------------------------------------------------------------------");
+        System.out.printf("| %-10s | %-8s | %-30s | %-20s | %-10s |%n", "ID", "NAME", "DEPARTMENT","DESIGNATION","SALARY");
+        System.out.println("------------------------------------------------------------------------------------------------------------------------------");
+        for(Employee employees : TestEmployee.employee){
             System.out.print(employees.toString());
-            employees.setAllowance();
+            System.out.println();
         }
+        System.out.println("------------------------------------------------------------------------------------------------------------------------------");
     }
-    int partition(ArrayList<Employee> employeeArrayList, int low, int high, String option) {
-        int n = employeeArrayList.size();
-        Employee temp;
-        String emp="",pivot="";
-        double empSalary=0,pivotSalary=0;
-        Employee pi = employeeArrayList.get(high);
-        int i = (low-1);
-        for (int j=low; j<high; j++) {
-            if(Integer.parseInt(option)==1){
-                emp= String.valueOf(employeeArrayList.get(j).getEmpId());
-                pivot= String.valueOf(pi.getEmpId());
-            }
-            if(Integer.parseInt(option)==2){
-                emp= employeeArrayList.get(j).getEmpName();
-                pivot=pi.getEmpName();
-            }
-            if(Integer.parseInt(option)==3){
-                emp=employeeArrayList.get(j).getDept();
-                pivot=pi.getDept();
-            }
-            if(Integer.parseInt(option)==4){
-                emp=employeeArrayList.get(j).getDesg();
-                pivot=pi.getDesg();
-            }
-            if(Integer.parseInt(option)==5){
-                empSalary=employeeArrayList.get(j).getSal();
-                pivotSalary= pi.getSal();
-            }
-            if (emp.compareTo(pivot) <0) {
-                i++;
-                temp = employeeArrayList.get(i);
-                employeeArrayList.set(i,employeeArrayList.get(j));
-                employeeArrayList.set(j,temp);
-            }
-            if (empSalary < pivotSalary) {
-                i++;
-                temp = employeeArrayList.get(i);
-                employeeArrayList.set(i,employeeArrayList.get(j));
-                employeeArrayList.set(j,temp);
-            }
-        }
-        temp = employeeArrayList.get(i+1);
-        employeeArrayList.set(i+1,employeeArrayList.get(high));
-        employeeArrayList.set(high,temp);
-        return i+1;
-    }
-    void quick_sort(ArrayList<Employee> employeeArrayList, int low, int high, String option) {
-        if (low < high) {
-            int pi = partition(employeeArrayList, low, high, option);
-            quick_sort(employeeArrayList, low, pi-1, option);
-            quick_sort(employeeArrayList, pi+1, high, option);
-        }
-    }
+    public void employeeSort(String option, String choice){
+        switch (option){
+            case "1": {
+                if (choice.equals("1")) {
+                    masterData.sort((e1, e2)->e1.getEmpId()-e2.getEmpId());
 
+                }
+                else{
+                    masterData.sort((e1, e2)->e2.getEmpId()-e1.getEmpId());
+                }
+                break;
+            }
+            case "2": {
+                if (choice.equals("1")) {
+                    masterData.sort((e1, e2) -> e1.getEmpName().compareTo(e2.getEmpName()));
+                }
+                else{
+                    masterData.sort((e1,e2) -> e2.getEmpName().compareTo(e1.getEmpName()));
+                }
+                break;
+            }
+            case "3": {
+                if (choice.equals("1")) {
+                    masterData.sort((e1,e2)->e1.getDept().compareTo(e2.getDept()));
+                }
+                else{
+                    masterData.sort((e1,e2)->e2.getDept().compareTo(e1.getDept()));
+                }
+                break;
+            }
+            case "4": {
+                if (choice.equals("1")) {
+                    masterData.sort((e1,e2)->e1.getDesg().compareTo(e2.getDesg()));
+                }
+                else{
+                    masterData.sort((e1,e2)->e2.getDesg().compareTo(e1.getDesg()));
+                }
+                break;
+            }
+            case "5": {
+                if (choice.equals("1")) {
+                    masterData.sort(( e1, e2)->e1.getSal().compareTo(e2.getSal()));
+                }
+                else{
+                    masterData.sort((e1,e2)->e2.getSal().compareTo(e1.getSal()));
+                }
+                break;
+            }
+        }
+        System.out.println("------------------------------------------------------------------------------------------------------------------------------");
+        System.out.printf("| %-10s | %-8s | %-30s | %-20s | %-10s |%n", "ID", "NAME", "DEPARTMENT", "DESIGNATION", "SALARY");
+        System.out.println("------------------------------------------------------------------------------------------------------------------------------");
+        for (Employee employee1 : masterData) {
+            System.out.println(employee1.toString());
+        }
+    }
 }
