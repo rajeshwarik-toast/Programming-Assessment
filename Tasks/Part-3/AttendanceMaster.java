@@ -9,7 +9,7 @@ public class AttendanceMaster {
                 System.out.println(">>>  ENTER THE NO OF DAYS OF " + employee.getEmpId());
                 noOfdays = sc.nextLine();
                 while (!(noOfdays.matches("[0-9]+"))) {
-                    System.out.println("Enter valid number of days");
+                    System.out.println("*** ENTER THE VALID NO OF DAYS ***");
                     noOfdays = sc.nextLine();
                 }
                 int value = Integer.parseInt(noOfdays);
@@ -19,24 +19,21 @@ public class AttendanceMaster {
     }
     public void showEligibleList() {
         Set<Map.Entry<Employee, Integer>> entrySet = employeeMap.entrySet();
+        System.out.println("\n------------------------------------------>>> ELIGIBLE LIST <<<------------------------------------------");
+        System.out.printf("| %-10s | %-8s | %-30s | %-20s | %-10s | %-10s |%n", "ID", "NAME", "DEPARTMENT","DESIGNATION","SALARY","ATTENDANCE");
+        System.out.println("----------------------------------------------------------------------------------------------------------");
         for (Map.Entry<Employee, Integer> entry1 : entrySet) {
             if (entry1.getValue() > 10) {
-                System.out.println("###                                    ELIGIBLE LIST                                    ###");
-                System.out.printf("| %-10s | %-8s | %-20s | %-20s | %-10s |%n", "ID", "NAME", "DEPARTMENT","DESIGNATION","SALARY");
-                System.out.println("------------------------------------------------------------------------------------------------------------------------------");
-                for(int i=0;i<employeeMap.size();i++) {
-                    System.out.print(entry1.getKey().toString());
-                    System.out.println();
-                }
-                //entry1.getKey().setAllowance();
-                System.out.println("    Attendance = " + entry1.getValue());
+                System.out.print(entry1.getKey().toString());
+                System.out.printf(" %-10s |",entry1.getValue());
+                System.out.println();
             }
         }
     }
     public void updateAttendance() {
         String employee_id, attendance;
         Employee employee = new Employee();
-        System.out.println(">>>  ENTER THE ID OF THE EMPLOYEE TO UPDATE ATTENDANCE\n");
+        System.out.println(">>>  ENTER THE ID OF THE EMPLOYEE TO UPDATE ATTENDANCE");
         employee_id = sc.nextLine();
         ArrayList<Integer> availableIdList = new ArrayList<>();
         for (Map.Entry entry : employeeMap.entrySet()) {
@@ -44,7 +41,7 @@ public class AttendanceMaster {
             availableIdList.add(e.getEmpId());
         }
         while (!((employee_id.matches("[0-9]+")) && availableIdList.contains(Integer.parseInt(employee_id)))) {
-            System.out.println(">>> EITHER ID IS NOT IN THE ATTENDANCE LIST OR NOT IN CORRECT FORMAT \n");
+            System.out.println("*** EITHER ID IS NOT IN THE ATTENDANCE LIST OR NOT IN CORRECT FORMAT ***\n");
             employee_id = sc.nextLine();
         }
         for (Employee employees : TestEmployee.employee) {
@@ -52,17 +49,21 @@ public class AttendanceMaster {
                 employee = employees;
             }
         }
-        System.out.println(">>>  ENTER THE ATTENDANCE TO BE UPDATED\n");
+        System.out.println(">>>  ENTER THE ATTENDANCE TO BE UPDATED");
         attendance = sc.nextLine();
         while (!(attendance.matches("[0-9]+"))) {
-            System.out.println(" ENTER VALID ATTENDANCE\n");
+            System.out.println("*** ENTER VALID ATTENDANCE ***\n");
             attendance = sc.nextLine();
         }
         int updateAttendance = Integer.parseInt(attendance);
         employeeMap.replace(employee, updateAttendance);
+        System.out.println("\n------------------------------------------>>> UPDATED LIST <<<------------------------------------------");
+        System.out.printf("| %-10s | %-8s | %-30s | %-20s | %-10s | %-10s |%n", "ID", "NAME", "DEPARTMENT","DESIGNATION","SALARY","ATTENDANCE");
+        System.out.println("----------------------------------------------------------------------------------------------------------");
         for (Map.Entry entry : employeeMap.entrySet()) {
-            System.out.println(entry.getKey());
-            System.out.println("ATTENDANCE : " + entry.getValue());
+            System.out.print(entry.getKey());
+            System.out.printf(" %-10s |",entry.getValue());
+            System.out.println();
         }
     }
     public void filterEmployeeList() {
@@ -72,16 +73,15 @@ public class AttendanceMaster {
                 employeeMap.remove(employee);
             }
         }
-        System.out.println("\n EMPLOYEE LIST IS SUCCESSFULLY REMOVED !!! ");
-        System.out.println("---------------->>> FILTERED LIST <<<----------------");
+        System.out.println("\n EMPLOYEE LIST IS FILTERED !!! ");
+        System.out.println("--------------------------------------------------------->>> FILTERED LIST <<<---------------------------------------------------------");
+        System.out.printf("| %-10s | %-8s | %-30s | %-20s | %-10s | %-10s |%n", "ID", "NAME", "DEPARTMENT","DESIGNATION","SALARY","ATTENDANCE");
+        System.out.println("------------------------------------------------------------------------------------------------------------------------------");
         for (Employee employee: employeeMap.keySet()) {
-            System.out.printf("| %-10s | %-8s | %-20s | %-20s | %-10s |%n", "ID", "NAME", "DEPARTMENT","DESIGNATION","SALARY");
-            System.out.println("------------------------------------------------------------------------------------------------------------------------------");
-            for(int i=0;i<employeeMap.size();i++) {
-                System.out.print(employee.toString());
-                System.out.println();
-            }
+            System.out.print(employee.toString());
+            System.out.printf(" %-10s |",employeeMap.get(employee));
+            System.out.println();
         }
-        System.out.println("--------------------------------------------------");
+        System.out.println("------------------------------------------------------------------------------------------------------------------------------");
     }
 }
