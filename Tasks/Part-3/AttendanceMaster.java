@@ -1,12 +1,13 @@
 import java.util.*;
 public class AttendanceMaster {
     LinkedHashMap<Employee, Integer> employeeMap = new LinkedHashMap<>();
+    private ArrayList<Employee> filteredlist = new ArrayList<>();
     Scanner sc = new Scanner(System.in);
     public void getAttendance(ArrayList<Employee> employees) {
         String noOfdays;
         for (Employee employee : employees) {
             if(!(employeeMap.containsKey(employee))){
-                if(!(employees.contains(employee))) {
+                if(!(filteredlist.contains(employee))) {
                     System.out.println(">>>  ENTER THE NO OF DAYS OF " + employee.getEmpId());
                     noOfdays = sc.nextLine();
                     while (!(noOfdays.matches("[0-9]+"))) {
@@ -25,7 +26,7 @@ public class AttendanceMaster {
         System.out.printf("| %-8s | %-15s | %-30s | %-20s | %-10s | %-10s |%n", "ID", "NAME", "DEPARTMENT","DESIGNATION","SALARY","ATTENDANCE");
         System.out.println("----------------------------------------------------------------------------------------------------------");
         for (Map.Entry<Employee, Integer> entry1 : entrySet) {
-            if (entry1.getValue() > 10) {
+            if (entry1.getValue() >= 10) {
                 System.out.print(entry1.getKey());
                 System.out.printf(" %-10s |",entry1.getValue());
                 System.out.println();
@@ -34,7 +35,6 @@ public class AttendanceMaster {
     }
     public void updateAttendance() {
         String employee_id, attendance;
-        ArrayList<Integer> availableIdList = new ArrayList<>();
         System.out.println(">>>  ENTER THE ID OF THE EMPLOYEE TO UPDATE ATTENDANCE");
         employee_id = sc.nextLine();
         while ((!(employee_id.matches("[0-9]+")))) {
