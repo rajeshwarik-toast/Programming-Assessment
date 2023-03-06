@@ -5,7 +5,7 @@ public class Employee {
     private String department;
     private String designation;
     private Double salary;
-    private static int counter = 1000;
+    static int counter = 1000;
     public Employee() {
         empID=++counter;
     }

@@ -44,11 +44,11 @@ public class TestEmployee {
                     break;
                 }
                 case "2": {
-                    if(employee.isEmpty()){
+                    if(employee.isEmpty()){  //condition to check whether the employee list is empty
                         System.out.println("***  THE EMPLOYEE LIST IS EMPTY !!! TO ADD THE EMPLOYEE DETAILS ENTER OPTION 1  ***");
                         break;
                     }
-                    else {
+                    else {  //if not empty
                         attendanceMaster.getAttendance(employee);
                         attendanceMaster.showEligibleList();
                         break;
@@ -56,22 +56,18 @@ public class TestEmployee {
                 }
                 case "3": {
                     AttendanceMaster attendanceMaster = new AttendanceMaster();
-                    if(!(attendanceMaster.employeeMap.isEmpty())){
+                    if(!(employee.isEmpty())){ //employee list is not empty
                         attendanceMaster.updateAttendance();
                         optionflag=false;
                         break;
                     }
-                    else if(employee.isEmpty()){
+                    else {   //employee is empty
                         System.out.println("***  THE EMPLOYEE LIST IS EMPTY !!! KINDLY PRESS OPTION 1 ADD EMPLOYEE DETAILS  ***");
-                        break;
-                    }
-                    else if(attendanceMaster.employeeMap.isEmpty()){
-                        System.out.println("***  ATTENDANCE HAS NOT BEEN ADDED !!! KINDLY PRESS OPTION 2 TO ADD ATTENDANCE  ***");
                         break;
                     }
                 }
                 case "4":{
-                    if(!(employee.isEmpty())){
+                    if(!(employee.isEmpty())){  //employee is not empty
                         System.out.println("##--------------------- SORTING ---------------------## \n    1. SORT BY ID\n    2. SORT BY NAME\n    3. SORT BY DEPARTMENT\n    4. SORT BY DESIGNATION\n    5. SORT BY SALARY\n" +
                                 " ENTER THE OPTION ");
                         String option = sc.nextLine();
@@ -81,7 +77,7 @@ public class TestEmployee {
                         }
                         System.out.println(" TO SORT IN \n >>>> 1. ASCENDING ORDER\n >>>> 2. DESCENDING ORDER \n ENTER THE OPTION");
                         String sortoption = sc.nextLine();
-                        while (!(sortoption.matches("[1-2]"))) {
+                        while (!(sortoption.matches("[1-2]"))) {    //ascending or descending
                             System.out.println("***  ENTER VALID OPTION  ***\n >>>> 1. ASCENDING ORDER\n >>>> 2. DESCENDING ORDER \n ENTER THE OPTION");
                             sortoption = sc.nextLine();
                         }
@@ -89,18 +85,18 @@ public class TestEmployee {
                         employeedata.employeeSort(option,sortoption);
                         break;
                     }
-                    else {
+                    else {  //employee is empty
                         System.out.println("***  THE EMPLOYEE LIST IS EMPTY!!  KINDLY PRESS OPTION 1 ADD EMPLOYEE DETAILS  ***");
                         break;
                     }
                 }
                 case "5": {
-                    if(!(attendanceMaster.employeeMap.isEmpty())){
+                    if(!(attendanceMaster.employeeMap.isEmpty())){  //employee and attendance is not empty
                         attendanceMaster.filterEmployeeList();
                         optionflag=true;
                         break;
                     }
-                    else if(employee.isEmpty()){
+                    else if(employee.isEmpty()){    //employee is empty
                         System.out.println("***  THE EMPLOYEE LIST IS EMPTY !!! KINDLY PRESS OPTION 1 ADD EMPLOYEE DETAILS  ***");
                         break;
                     }
