@@ -72,13 +72,6 @@ public class Employee {
         }
     }
     public Double getSal(){ return salary;}
-    public Employee(String empName, String dept, String  desgn, Double sal){
-        empID = ++counter;
-        this.name=empName;
-        this.department=dept;
-        this.designation=desgn;
-        this.salary=sal;
-    }
     public void setAllowance(){
         if(designation.compareTo("Manager") == 0){
             salary=this.salary+((20.0/100.0)*this.salary);
