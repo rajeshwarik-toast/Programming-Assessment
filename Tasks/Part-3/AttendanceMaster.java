@@ -1,8 +1,9 @@
 import java.util.*;
 public class AttendanceMaster {
     LinkedHashMap<Employee, Integer> employeeMap = new LinkedHashMap<>();
-    private ArrayList<Employee> filteredlist = new ArrayList<>();
+    ArrayList<Employee> filteredlist = new ArrayList<>();
     Scanner sc = new Scanner(System.in);
+    Set<Map.Entry<Employee, Integer>> entrySet = employeeMap.entrySet();
     public void getAttendance(ArrayList<Employee> employees) {
         String noOfdays;
         for (Employee employee : employees) {
@@ -21,10 +22,9 @@ public class AttendanceMaster {
         }
     }
     public void showEligibleList() {
-        Set<Map.Entry<Employee, Integer>> entrySet = employeeMap.entrySet();
-        System.out.println("\n------------------------------------------>>> ELIGIBLE LIST <<<------------------------------------------");
+        System.out.println("\n--------------------------------------------------------------->>> ELIGIBLE LIST <<<---------------------------------------------------------------");
         System.out.printf("| %-8s | %-15s | %-30s | %-20s | %-10s | %-10s |%n", "ID", "NAME", "DEPARTMENT","DESIGNATION","SALARY","ATTENDANCE");
-        System.out.println("----------------------------------------------------------------------------------------------------------");
+        System.out.println("---------------------------------------------------------------------------------------------------------------------------------------------------");
         for (Map.Entry<Employee, Integer> entry1 : entrySet) {
             if (entry1.getValue() >= 10) {
                 System.out.print(entry1.getKey());
@@ -32,6 +32,7 @@ public class AttendanceMaster {
                 System.out.println();
             }
         }
+        System.out.println("---------------------------------------------------------------------------------------------------------------------------------------------------");
     }
     public void updateAttendance() {
         String employee_id, attendance;
@@ -41,7 +42,10 @@ public class AttendanceMaster {
             System.out.println("*** EITHER ID IS NOT IN THE EMPLOYEE LIST OR NOT IN CORRECT FORMAT ***\n");
             employee_id = sc.nextLine();
         }
-        if (Employee.counter < Integer.valueOf(employee_id)) {
+        if (Employee.counter < Integer.valueOf(employee_id)){
+            System.out.println("*** EMPLOYEE ID NOT FOUND ***");
+        }
+        else if(Integer.valueOf(employee_id)<1000) {
             System.out.println("*** EMPLOYEE ID NOT FOUND ***");
         }
         else {
@@ -52,9 +56,13 @@ public class AttendanceMaster {
                 attendance = sc.nextLine();
             }
             int updateAttendance = Integer.parseInt(attendance);
-            for(Employee employee1:TestEmployee.employee) {
-                if (employee1.getEmpId() == Integer.parseInt(employee_id)) {
-                    employeeMap.put(employee1, updateAttendance);
+            for(Employee employees:TestEmployee.employee) {
+                if (employees.getEmpId() == Integer.parseInt(employee_id)) {   //whether the given id is present in the employee list
+                    employeeMap.put(employees, updateAttendance);
+                    if(filteredlist.contains(employees)){
+                        filteredlist.remove(employees);
+                    }
+                    break;
                 }
             }
             System.out.println("UPDATED SUCCESSFULLY !!!");
@@ -63,7 +71,7 @@ public class AttendanceMaster {
     public void filterEmployeeList() {
         ArrayList<Employee> employeeArrayList = new ArrayList<>(employeeMap.keySet());
         for(Employee employee : employeeArrayList){
-            if(this.employeeMap.get(employee)<10){
+            if(employeeMap.get(employee)<10){
                 filteredlist.add(employee);
                 employeeMap.remove(employee);
             }
@@ -72,7 +80,7 @@ public class AttendanceMaster {
             showEligibleList();
         }
         else{
-            System.out.println("***  ELIGIBLE LIST IS EMPTY  ***");
+            System.out.println("***  FILTERED LIST IS EMPTY  ***");
         }
     }
 }

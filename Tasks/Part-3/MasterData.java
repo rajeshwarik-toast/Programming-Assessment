@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 public class MasterData {
-    private ArrayList<Employee> masterData = new ArrayList<>();
+    ArrayList<Employee> masterData = new ArrayList<>();
     MasterData(ArrayList<Employee> employee){
         for(Employee employees : employee){
             masterData.add(employees);
@@ -21,7 +21,6 @@ public class MasterData {
             case "1": {
                 if (choice.equals("1")) {
                     masterData.sort((e1, e2)->e1.getEmpId()-e2.getEmpId());
-
                 }
                 else{
                     masterData.sort((e1, e2)->e2.getEmpId()-e1.getEmpId());
@@ -71,5 +70,6 @@ public class MasterData {
         for (Employee employee1 : masterData) {
             System.out.println(employee1.toString());
         }
+        System.out.println("------------------------------------------------------------------------------------------------------------------------------");
     }
 }
