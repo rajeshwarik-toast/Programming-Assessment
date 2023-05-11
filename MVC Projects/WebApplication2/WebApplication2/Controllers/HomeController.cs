@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿﻿using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using WebApplication2.Models;
 using System.Data.SqlClient;
@@ -27,8 +27,8 @@ namespace WebApplication2.Controllers
                 SqlCommand command = new SqlCommand("SELECT * FROM XTRACHEF_EMPLOYEE WHERE EMPLOYEE_USERNAME=@username AND EMPLOYEE_PASSWORD=@password", connection);
                 command.Parameters.AddWithValue("@username", username);
                 command.Parameters.AddWithValue("@password", password);
-                command.ExecuteReader();
-                if (true)
+                var result = command.ExecuteReader();
+                if (result.HasRows)
                 {
                     // Login successful
                     return View("Finalpage");

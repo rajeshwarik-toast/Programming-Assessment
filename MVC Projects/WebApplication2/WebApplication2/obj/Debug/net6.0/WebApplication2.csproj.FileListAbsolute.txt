@@ -36,3 +36,4 @@ C:\Users\XCT\source\repos\WebApplication2\WebApplication2\obj\Debug\net6.0\refin
 C:\Users\XCT\source\repos\WebApplication2\WebApplication2\obj\Debug\net6.0\WebApplication2.pdb
 C:\Users\XCT\source\repos\WebApplication2\WebApplication2\obj\Debug\net6.0\WebApplication2.genruntimeconfig.cache
 C:\Users\XCT\source\repos\WebApplication2\WebApplication2\obj\Debug\net6.0\ref\WebApplication2.dll
+C:\Users\XCT\source\repos\WebApplication2\WebApplication2\bin\Debug\net6.0\System.Diagnostics.DiagnosticSource.dll
